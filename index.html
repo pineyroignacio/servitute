@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Servitute · Soluciones, Nachito</title>
+<meta name="description" content="Soluciones en sistemas, cámaras de seguridad, armado y reparación de PCs, redes y domótica en CABA. Escribime por WhatsApp.">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:title" content="Servitute · Soluciones, Nachito">
+<meta property="og:description" content="Sistemas, cámaras, PCs, redes y domótica en CABA. Casi me animo a todo.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff7a1a'/%3E%3Cpath d='M20 24c0-6 24-6 24 0 0 7-24 9-24 16 0 6 24 6 24 0' fill='none' stroke='%23150800' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#0a0a0a; --surface:#151312; --fg:#f6f1ed; --muted:#aaa19b; --line:#2b2624;
+  --accent:#ff7a1a; --accent-fg:#150800; --accent-soft:#2a1609; --red:#e5322d;
+  --font-display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --font-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:960px;margin-inline:auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--font-display);margin:0;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:clamp(1.6rem,4vw,2.1rem);margin-bottom:8px}
+p{margin:0 0 12px}
+.lead{color:var(--muted);max-width:58ch}
+
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-weight:800;font-size:1.3rem}
+.logo svg{flex:none}
+nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.95rem}
+nav a:hover{color:var(--accent)}
+@media (max-width:620px){nav a.hide-sm{display:none}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:14px 22px;font:inherit;font-weight:700;text-decoration:none;cursor:pointer;background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:transparent;color:var(--fg);border:1.5px solid var(--line)}
+.btn:hover{filter:brightness(1.06)}
+@media (prefers-reduced-motion:no-preference){.btn,.card{transition:transform .15s,filter .15s,border-color .15s}.btn:hover{transform:translateY(-1px)}}
+
+.hero{padding-block:clamp(40px,9vw,88px) clamp(32px,6vw,56px)}
+.eyebrow{display:inline-block;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);font-weight:700;font-size:.85rem;border-radius:999px;padding:5px 14px;margin-bottom:18px}
+.hero h1{font-size:clamp(2.2rem,7vw,3.8rem);line-height:1.05;margin-bottom:16px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--red),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{font-size:1.15rem;margin-bottom:26px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+
+section{padding-block:clamp(36px,7vw,64px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.card:hover{border-color:var(--red)}
+.card .ico{width:48px;height:48px;border-radius:14px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:14px}
+.card h3{font-size:1.2rem;margin-bottom:6px}
+.card p{color:var(--muted);font-size:.97rem;margin:0}
+
+.steps{counter-reset:s;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:24px;padding:0;list-style:none}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--accent));color:#fff;font-family:var(--font-display);font-weight:800;margin-bottom:12px}
+.steps h3{font-size:1.1rem;margin-bottom:4px}
+.steps p{color:var(--muted);font-size:.97rem;margin:0}
+
+.contact{background:linear-gradient(135deg,#b91c1c,#ea580c);color:#fff;border-radius:26px;padding:clamp(26px,6vw,48px);margin-bottom:48px}
+.contact h2{color:inherit}
+.contact p{opacity:.92;max-width:52ch}
+.contact .btn{background:#fff;color:#b91c1c}
+.contact .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.contact .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+
+footer{border-top:1px solid var(--line);padding-block:24px 96px;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+
+.wa-float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#0a0a0a;text-decoration:none;font-weight:700;border-radius:999px;padding:13px 20px;box-shadow:0 6px 18px rgba(0,0,0,.28)}
+.wa-float:hover{filter:brightness(1.08)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Servitute, inicio">
+      <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--accent)"/><path d="M20 24c0-6 24-6 24 0 0 7-24 9-24 16 0 6 24 6 24 0" fill="none" stroke="var(--accent-fg)" stroke-width="6" stroke-linecap="round"/></svg>
+      Servitute
+    </a>
+    <nav aria-label="Secciones">
+      <a class="hide-sm" href="#servicios">Servicios</a>
+      <a class="hide-sm" href="#como">Cómo trabajo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="wrap hero">
+    <span class="eyebrow">Sistemas · Cámaras · PCs · Redes · Domótica</span>
+    <h1>Soluciones, <em>Nachito</em>.<br>Si es de tecnología, lo vemos.</h1>
+    <p class="lead">Arreglo, armo e instalo. Desde una PC que anda lenta hasta las cámaras de tu local o la automatización de tu casa. Casi me animo a todo, y lo que no, te lo digo de frente.</p>
+    <div class="cta">
+      <a class="btn" href="https://wa.me/5491131961232?text=Hola%20Nacho%2C%20vi%20tu%20p%C3%A1gina%20de%20Servitute%20y%20quer%C3%ADa%20consultarte%20por..." target="_blank" rel="noopener">Escribime por WhatsApp</a>
+      <a class="btn ghost" href="#servicios">Ver servicios</a>
+    </div>
+  </div>
+
+  <section id="servicios">
+    <div class="wrap">
+      <h2>Qué hago</h2>
+      <p class="lead">Para casas, comercios y pymes en CABA.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l3-3h9l3 3v6l-3 3H6l-3-3z"/><circle cx="10.5" cy="11" r="2.5"/><path d="M18 9l3-2v8l-3-2"/></svg></div>
+          <h3>Cámaras de seguridad</h3>
+          <p>Instalación y mantenimiento de cámaras para tu casa o local. Con acceso desde el celular para mirar cuando quieras.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+          <h3>Armado y reparación de PCs</h3>
+          <p>PC a medida para trabajo, estudio o juegos. También service, limpieza, cambio de piezas y recuperación de equipos lentos.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/><path d="M2 9a15 15 0 0 1 20 0"/></svg></div>
+          <h3>Redes y soporte IT</h3>
+          <p>WiFi que llega a todos lados, routers, servidores y soporte técnico para tu comercio o pyme.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div>
+          <h3>Domótica y Home Assistant</h3>
+          <p>Automatización del hogar: luces, sensores, alertas y paneles, todo junto y sin depender de la nube.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="como">
+    <div class="wrap">
+      <h2>Cómo trabajo</h2>
+      <p class="lead">Sin vueltas y sin letra chica.</p>
+      <ol class="steps">
+        <li><h3>Me contás</h3><p>Escribime por WhatsApp qué necesitás o qué no anda. Con una foto o un audio alcanza.</p></li>
+        <li><h3>Te paso el presupuesto</h3><p>Te explico qué hay que hacer y cuánto sale, en palabras simples, antes de empezar.</p></li>
+        <li><h3>Lo resuelvo</h3><p>Voy, lo hago y lo dejo funcionando. Si hace falta, te enseño a usarlo.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contact">
+        <h2>¿Charlamos?</h2>
+        <p>Contame qué necesitás y te respondo lo antes posible. Trabajo en CABA.</p>
+        <div class="row">
+          <a class="btn" href="https://wa.me/5491131961232?text=Hola%20Nacho%2C%20vi%20tu%20p%C3%A1gina%20de%20Servitute%20y%20quer%C3%ADa%20consultarte%20por..." target="_blank" rel="noopener">WhatsApp +54 9 11 3196-1232</a>
+          <a class="btn ghost" href="mailto:contacto@servitute.com.ar">contacto@servitute.com.ar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y">2026</span> Servitute · Soluciones, Nachito</span>
+    <span>CABA, Argentina</span>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5491131961232?text=Hola%20Nacho%2C%20vi%20tu%20p%C3%A1gina%20de%20Servitute%20y%20quer%C3%ADa%20consultarte%20por..." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="#128c4a" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.8-4.6-4-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.6.8 2 .8 2.1.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.6.8 1.9.9.3.2.5.2.6.3.1.2.1.8-.1 1.5z"/></svg>
+  WhatsApp
+</a>
+
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
