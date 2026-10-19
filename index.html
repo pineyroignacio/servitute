@@ -61,6 +61,11 @@ section{padding-block:clamp(36px,7vw,64px)}
 .card h3{font-size:1.2rem;margin-bottom:6px}
 .card p{color:var(--muted);font-size:.97rem;margin:0}
 
+.card .links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px}
+.card .links a{color:var(--accent);font-weight:700;text-decoration:none}
+.card .links a:hover{text-decoration:underline;text-underline-offset:3px}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;color:var(--red);border:1px solid color-mix(in srgb,var(--red) 45%,transparent);border-radius:999px;padding:2px 10px;margin-bottom:10px}
+
 .steps{counter-reset:s;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:24px;padding:0;list-style:none}
 .steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
 .steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--accent));color:#fff;font-family:var(--font-display);font-weight:800;margin-bottom:12px}
@@ -92,6 +97,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     <nav aria-label="Secciones">
       <a class="hide-sm" href="#servicios">Servicios</a>
       <a class="hide-sm" href="#como">Cómo trabajo</a>
+      <a class="hide-sm" href="#proyectos">Proyectos</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </div>
@@ -146,6 +152,32 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
         <li><h3>Te paso el presupuesto</h3><p>Te explico qué hay que hacer y cuánto sale, en palabras simples, antes de empezar.</p></li>
         <li><h3>Lo resuelvo</h3><p>Voy, lo hago y lo dejo funcionando. Si hace falta, te enseño a usarlo.</p></li>
       </ol>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="wrap">
+      <h2>Proyectos personales</h2>
+      <p class="lead">Cosas que armo por gusto y dejo abiertas en GitHub.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">App web</span>
+          <h3>Vaquita Fácil</h3>
+          <p>App gratis para dividir los gastos de una juntada con amigos. Cada uno carga lo suyo y la app calcula quién le paga a quién.</p>
+          <div class="links">
+            <a href="https://pineyroignacio.github.io/vaquita-facil/" target="_blank" rel="noopener">Abrir la app</a>
+            <a href="https://github.com/pineyroignacio/vaquita-facil" target="_blank" rel="noopener">Ver en GitHub</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag">Python</span>
+          <h3>Revogi SmartSense</h3>
+          <p>Código en Python para trabajar con dispositivos Revogi SmartSense.</p>
+          <div class="links">
+            <a href="https://github.com/pineyroignacio/revogi-smartsense" target="_blank" rel="noopener">Ver en GitHub</a>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
