@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cifrador · Servitute</title>
+<meta name="description" content="Cifrá una palabra con una clave y descifrala después. Todo pasa en tu navegador.">
+<meta name="theme-color" content="#0a0a0a">
+<style>
+:root{--bg:#0a0a0a;--surface:#151312;--fg:#f6f1ed;--muted:#aaa19b;--line:#2b2624;--accent:#ff7a1a;--accent-fg:#150800;--red:#e5322d;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,-apple-system,'Segoe UI',sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:28px 20px 60px}
+a{color:var(--accent)}
+h1{font-size:clamp(1.8rem,6vw,2.4rem);line-height:1.1;margin:18px 0 8px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--red),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);margin:0 0 22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
+h2{font-size:1.15rem;margin:0 0 12px}
+label{display:block;font-weight:600;font-size:.92rem;margin:12px 0 6px}
+input,textarea{width:100%;background:var(--bg);color:var(--fg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit}
+textarea{min-height:84px;resize:vertical;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;word-break:break-all}
+input:focus,textarea:focus{outline:3px solid var(--accent);outline-offset:1px}
+button{margin-top:14px;border:0;border-radius:12px;padding:12px 20px;font:inherit;font-weight:700;background:var(--accent);color:var(--accent-fg);cursor:pointer}
+button.ghost{background:transparent;color:var(--fg);border:1.5px solid var(--line);margin-left:8px}
+.out{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--bg);border:1px dashed var(--line);min-height:46px;word-break:break-all;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92rem}
+.err{color:var(--red)}
+small{color:var(--muted);display:block;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="/">← Servitute</a>
+  <h1>Cifrador <em>de palabras</em></h1>
+  <p class="lead">Escribí una palabra y una clave: te devuelve un texto cifrado. Para recuperar la palabra, pegá ese texto con la misma clave.</p>
+
+  <div class="card">
+    <h2>1. Cifrar</h2>
+    <label for="p1">Palabra o mensaje</label>
+    <input id="p1" autocomplete="off">
+    <label for="k1">Clave</label>
+    <input id="k1" type="password" autocomplete="off">
+    <button id="enc">Cifrar</button>
+    <div class="out" id="o1" aria-live="polite"></div>
+    <button class="ghost" id="cp" hidden>Copiar</button>
+  </div>
+
+  <div class="card">
+    <h2>2. Descifrar</h2>
+    <label for="c2">Texto cifrado</label>
+    <textarea id="c2"></textarea>
+    <label for="k2">Clave</label>
+    <input id="k2" type="password" autocomplete="off">
+    <button id="dec">Descifrar</button>
+    <div class="out" id="o2" aria-live="polite"></div>
+  </div>
+
+  <small>Usa AES-256-GCM con la clave derivada por PBKDF2. Todo ocurre en tu navegador: no se envía nada a ningún servidor. Si perdés la clave, no hay forma de recuperar el texto.</small>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const te=new TextEncoder(),td=new TextDecoder();
+const b64=u=>btoa(String.fromCharCode(...u));
+const unb64=s=>Uint8Array.from(atob(s.trim()),c=>c.charCodeAt(0));
+async function key(pw,salt){
+  const base=await crypto.subtle.importKey('raw',te.encode(pw),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:250000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+$('enc').onclick=async()=>{
+  const o=$('o1');o.className='out';
+  if(!$('p1').value||!$('k1').value){o.textContent='Completá la palabra y la clave.';o.classList.add('err');return}
+  const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+  const k=await key($('k1').value,salt);
+  const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv:iv},k,te.encode($('p1').value)));
+  const all=new Uint8Array(28+ct.length);all.set(salt);all.set(iv,16);all.set(ct,28);
+  o.textContent=b64(all);$('cp').hidden=false;
+};
+$('cp').onclick=async()=>{try{await navigator.clipboard.writeText($('o1').textContent);$('cp').textContent='Copiado'}catch(e){}setTimeout(()=>$('cp').textContent='Copiar',1500)};
+$('dec').onclick=async()=>{
+  const o=$('o2');o.className='out';
+  try{
+    const all=unb64($('c2').value);
+    const k=await key($('k2').value,all.slice(0,16));
+    const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:all.slice(16,28)},k,all.slice(28));
+    o.textContent=td.decode(pt);
+  }catch(e){o.textContent='No se pudo descifrar: la clave es incorrecta o el texto está dañado.';o.classList.add('err')}
+};
+</script>
+</body>
+</html>
